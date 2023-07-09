@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+.tela-mapa {
+    font-family: 'Comfortaa', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.conteudo-mapa {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    flex-wrap: wrap;
+}
+
+.conteudo-mapa .retangulo {
+    position: relative;
+    width: 280px;
+    height: 400px;
+    margin: 30px;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0e, 0.5);
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.conteudo-mapa .retangulo .conteudo-retangulo {
+    padding: 20px;
+    text-align: center;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.conteudo-mapa .retangulo:hover .conteudo-retangulo {
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.conteudo-mapa .retangulo .conteudo-retangulo h2 {
+    position: absolute;
+    top: -80px;
+    right: 30px;
+    font-size: 8em;
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+}
+
+.conteudo-mapa .retangulo .conteudo-retangulo h3 {
+    font-size: 1.8em;
+    color: #FFF;
+    z-index: 1;
+}
+
+.conteudo-mapa .retangulo .conteudo-retangulo p {
+    font-size: 1em;
+    color: #FFF;
+    font-weight: 300;
+}
+
+.conteudo-mapa .retangulo .conteudo-retangulo a {
+    position: relative;
+    display: inline-block;
+    padding: 8px 20px;
+    margin-top: 15px;
+    background: #FFF;
+    color: #000;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.tela-mapa h1 {
+    text-align: center;
+    color: white;
+    font-size: 2 px;
+}
+
+#mapa-um {
+    background: url(../../assets/img/combinatoria.png);
+}
+
+#mapa-dois {
+    background: url(imgs/mapas/mapa-praia-bw.jpeg);
+}
+
+#mapa-tres {
+    background: url(imgs/mapas/mapa-cupcake-bw.jpeg);
+}
