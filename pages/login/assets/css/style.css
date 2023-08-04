@@ -34,7 +34,7 @@ p {
 }
 
 span {
-	font-size: 12px;
+	font-size: 13px;
 }
 
 a {
@@ -55,6 +55,12 @@ button {
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
+	transition: background-color 100ms;
+}
+
+button:hover{
+	cursor: pointer;
+	background-color: #00a393;
 }
 
 button:active {
@@ -70,7 +76,11 @@ button.ghost {
 	border-color: #FFFFFF;
 }
 
-form {
+button.ghost:hover{
+	background-color: #00a393;
+}
+
+.form {
 	background-color: #FFFFFF;
 	display: flex;
 	align-items: center;
@@ -83,10 +93,24 @@ form {
 
 input {
 	background-color: #eee;
-	border: none;
+	border: 0px solid #008375;
 	padding: 12px 15px;
 	margin: 8px 0;
 	width: 100%;
+}
+
+.select2 {
+	margin: 8px 0!important;
+}
+
+.select2-selection--single{
+	background-color: #eee!important;
+}
+
+input:focus{
+	outline: none;
+	border: 2px solid #008375;
+	border-radius: 5px;
 }
 
 .container {
@@ -255,6 +279,7 @@ footer a {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+	margin: 8px 0;
 }
 
 #professor {
@@ -267,4 +292,34 @@ footer a {
     margin-right: 10px;
     margin-top: 5px;
     margin-left: 5px;
+}
+
+select {
+	padding: 10px 30px 10px 10px;
+	outline: none;
+  	-moz-appearance: none;
+  	-webkit-appearance: none;
+  	appearance: none;
+}
+
+option{
+	padding: 10px 30px 10px 10px;
+	margin: 10px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	text-align: left!important;
+	line-height: unset!important;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered{
+    padding: 12px 15px!important;
+}
+
+.select2-container .select2-selection--single {
+	height: unset!important;
+}
+
+.select2-container {
+	width: 100%!important;
 }
