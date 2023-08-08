@@ -198,7 +198,7 @@
         function checkAnswer(selectedIndex) {
             var question = questions[questionIndex];
 
-            if (selectedIndex === question.resposta) {
+            if (selectedIndex === question.resposta - 1) {
                 alert("Resposta correta!");
                 numCorretas++;
             } else {
