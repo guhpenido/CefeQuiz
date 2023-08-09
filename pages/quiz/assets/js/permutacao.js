@@ -1,4 +1,4 @@
-var questions = [
+let questions = [
     {
         pergunta: "(U.F.STA.CATARINA) O número de anagramas da palavra ALUNO, em que as consoantes ficam na ordem LN e as vogais na ordem AUO é:",
         opcoes: ["20", "120", "10", "60", "40"],
@@ -101,29 +101,46 @@ var questions = [
     },
 ];
 
-var questionIndex = 0;
+let questionIndex = 0;
+let numCorretas = 0;
+let numIncorretas = 0;
+let selectedQuestions = [];
+
+function getRandomQuestion() {
+    let randomIndex = Math.floor(Math.random() * questions.length);
+    if (!selectedQuestions.includes(randomIndex)) {
+        selectedQuestions.push(randomIndex);
+        return questions[randomIndex];
+    } else {
+        return getRandomQuestion();
+    }
+}
 
 function showQuestion() {
-    var questionElement = document.getElementById("question");
-    var optionsElement = document.getElementById("options");
-    var question = questions[questionIndex];
+    if (questionIndex < 10) {
+        let questionElement = document.getElementById("question");
+        let optionsElement = document.getElementById("options");
+        let question = getRandomQuestion();
 
-    questionElement.textContent = question.pergunta;
+        questionElement.textContent = question.pergunta;
 
-    // Limpa as opções
-    optionsElement.innerHTML = "";
+        optionsElement.innerHTML = "";
 
-    // Adiciona as opções
-    for (var i = 0; i < question.opcoes.length; i++) {
-        var option = document.createElement("button");
-        option.textContent = question.opcoes[i];
-        option.addEventListener("click", checkAnswer.bind(null, i));
-        optionsElement.appendChild(option);
+        for (let i = 0; i < question.opcoes.length; i++) {
+            let option = document.createElement("button");
+            option.textContent = question.opcoes[i];
+            option.addEventListener("click", checkAnswer.bind(null, i));
+            optionsElement.appendChild(option);
+        }
+        updateStatus();
+    } else {
+        alert("Trivia concluída!");
+        location.reload();
     }
 }
 
 function checkAnswer(selectedIndex) {
-    var question = questions[questionIndex];
+    let question = questions[selectedQuestions[questionIndex]];
 
     if (selectedIndex === question.resposta) {
         alert("Resposta correta!");
@@ -133,26 +150,13 @@ function checkAnswer(selectedIndex) {
         numIncorretas++;
     }
 
-    if (questionIndex < questions.length - 1) {
-        questionIndex++;
-        showQuestion();
-    } else {
-        alert("Trivia concluída!");
-        // redirecionar para outra página
-        location.reload();
-    }
-
-    updateStatus();
+    questionIndex++;
+    showQuestion();
 }
-
-var numCorretas = 0;
-var numIncorretas = 0;
 
 function updateStatus() {
-    var statusElement = document.getElementById("status");
-    statusElement.textContent = `Pergunta ${questionIndex + 1} de ${questions.length} | Corretas: ${numCorretas} | Incorretas: ${numIncorretas}`;
+    let statusElement = document.getElementById("status");
+    statusElement.textContent = `Pergunta ${questionIndex + 1} de 10 | Corretas: ${numCorretas} | Incorretas: ${numIncorretas}`;
 }
 
-
-updateStatus();
 showQuestion();
