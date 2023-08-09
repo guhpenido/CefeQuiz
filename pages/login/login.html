@@ -13,6 +13,12 @@
 			<div class="form">
 				<h1>Crie sua conta!</h1>
 				<span>Utilize seu email para se registrar</span>
+				<div class="escolha">
+					<input type="radio" id="aluno2" name="tipo2" value="aluno" onchange="alteraTipoCad()" checked/>
+					<label id="aluno2" for="aluno2">Aluno</label>
+					<input type="radio" id="professor2" name="tipo2" value="professor" onchange="alteraTipoCad()"/>
+					<label id="professor2" for="professor2">Professor</label>
+				</div>
 				<input id="sign-up-nome" type="text" placeholder="Nome"/>
 				<select name="curso" id="sign-up-curso" class="js-example-basic-single">
 					<option></option>
@@ -31,6 +37,7 @@
 				</select>
 				<input id="sign-up-email" type="email" placeholder="Email"/>
 				<input id="sign-up-password" type="password" placeholder="Senha"/>
+				<input id="sign-up-cod" type="text" placeholder="Código Verificador" class="hidden"/>
 				<button id="sign-up-btn">Criar conta</button>
 			</div>
 		</div>
@@ -38,14 +45,16 @@
 			<div class="form">
 				<h1>Entre na sua conta</h1>
 				<span>Use sua conta</span>
-				<div id="escolha">
-					<input type="radio" id="contactChoice2" name="contact" value="professor"/>
-					<label id="professor" for="contactChoice2">Professor</label>
-					<input type="radio" id="contactChoice1" name="contact" value="aluno"/>
+				<div class="escolha">
+					<input type="radio" id="contactChoice1" name="tipo" value="aluno" onchange="alteraTipo()" checked/>
 					<label id="aluno" for="contactChoice1">Aluno</label>
+					<input type="radio" id="contactChoice2" name="tipo" value="professor" onchange="alteraTipo()"/>
+					<label id="professor" for="contactChoice2">Professor</label>
 				</div>
 				<input id="sign-in-email" type="email" placeholder="Email" />
 				<input id="sign-in-password" type="password" placeholder="Senha" />
+				<input id="sign-in-cod" type="text" placeholder="Código" class="hidden"/>
+				<span id="span-error"></span>
 				<a href="#">Esqueceu sua senha?</a>
 				<button id="sign-in-btn">Entrar</button>
 			</div>
@@ -76,6 +85,36 @@
 			placeholder: 'Curso'
 		});
 	});
+
+
+	function alteraTipo() {
+		let signInTipo = document.querySelector('input[name="tipo"]:checked').value;
+		let codEl = document.querySelector('#sign-in-cod');
+
+		if (signInTipo == "professor") {
+			codEl.classList.remove('hidden');
+		} else {
+			codEl.classList.add('hidden');
+		}
+	}
+
+	function alteraTipoCad() {
+		let signUpTipo = document.querySelector('input[name="tipo2"]:checked').value;
+		let codEl = document.querySelector('#sign-up-cod');
+		let cursoEl = document.querySelector('#sign-up-curso');
+		let select = document.querySelectorAll('.select2')
+		console.log(select[0])
+
+		if (signUpTipo == "professor") {
+			cursoEl.classList.add('hidden')
+			select[0].classList.add('hidden');
+			codEl.classList.remove('hidden');
+		} else {
+			cursoEl.classList.remove('hidden')
+			select[0].classList.remove('hidden');
+			codEl.classList.add('hidden');
+		}
+	}
 	</script>
 </body>
 </html>
