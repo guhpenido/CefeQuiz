@@ -1,3 +1,60 @@
+import { auth, db } from "../../../../pages/login/assets/js/firebase.js";
+import {
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+async function getUserName(uid) {
+  const docRef = doc(db, "aluno", uid);
+
+  try {
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const userData = docSnap.data();
+      return userData.nome; // Assuming 'nome' is the field containing the user's name
+    } else {
+      return null; // User document doesn't exist
+    }
+  } catch (error) {
+    console.error("Error getting user data:", error);
+    return null;
+  }
+}
+
+async function getUserInfo() {
+    // Listen for changes in authentication state
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        // User is signed in
+        console.log("User is signed in:", user);
+        const userName = await getUserName(user.uid);
+  
+        if (userName) {
+          let loginSpan = document.getElementById("nomeDaPessoa");
+          console.log("User's Name:", userName);
+          loginSpan.innerHTML = userName;
+        } else {
+          console.log("User document not found.");
+        }
+      } else {
+        alert("Você não está logado!");
+        window.location.href = "../../../../pages/login/login.html";
+      }
+  
+      // Unsubscribe to the listener
+      unsubscribe();
+    });
+  }
+  
+  // Call the function when the page loads
+  getUserInfo();
+
+
 var questions = [
     {
         pergunta: "(U.F.STA.CATARINA) O número de anagramas da palavra ALUNO, em que as consoantes ficam na ordem LN e as vogais na ordem AUO é:",

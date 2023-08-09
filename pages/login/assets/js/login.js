@@ -1,67 +1,75 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 import { auth, db } from "./firebase.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+import {
+  doc,
+  setDoc,
+} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 
 let user = "";
 
-let signUpBtn = document.querySelector('#sign-up-btn');
-signUpBtn.addEventListener('click', cadastraUsuario);
+let signUpBtn = document.querySelector("#sign-up-btn");
+signUpBtn.addEventListener("click", cadastraUsuario);
 
-function cadastraUsuario() {
+async function cadastraUsuario() {
+  try {
+    const signUpNome = document.querySelector("#sign-up-nome").value;
+    const signUpEmail = document.querySelector("#sign-up-email").value;
+    const signUpPassword = document.querySelector("#sign-up-password").value;
+    const signUpCurso = document.querySelector("#sign-up-curso").value;
 
-    let signUpNome = document.querySelector('#sign-up-nome').value;
-    let signUpEmail = document.querySelector('#sign-up-email').value;
-    let signUpPassword = document.querySelector('#sign-up-password').value;
-    let signUpCurso = document.querySelector('#sign-up-curso').value;
-    console.log(signUpCurso);
+    // Input validation goes here
 
-    createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
-    .then((userCredential) => {
-        // Signed in 
-        user = userCredential.user;
-        // ...
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      signUpEmail,
+      signUpPassword
+    );
+    const user = userCredential.user;
 
-        const usuario = {
-            nome: signUpNome,
-            email: signUpEmail,
-            uid: user.uid,
-            curso: signUpCurso
-        }
-    
-        setDoc(doc(db, "aluno", user.uid), usuario);
+    const usuario = {
+      nome: signUpNome,
+      email: signUpEmail,
+      uid: user.uid,
+      curso: signUpCurso,
+    };
 
-        window.location.href = "../home/index.html";
+    await setDoc(doc(db, "aluno", user.uid), usuario);
 
-    })
-    .catch((error) => {
-        console.log(error.message)
-    });
+    alert("Usuário cadastrado com sucesso!");
 
+    window.location.href = "../home/index.html";
+  } catch (error) {
+    console.log(error.message);
+    alert(error.message);
+  }
 }
 
-let signInBtn = document.querySelector('#sign-in-btn');
-signInBtn.addEventListener('click', loginUsuario);
+let signInBtn = document.querySelector("#sign-in-btn");
+signInBtn.addEventListener("click", loginUsuario);
 
 function loginUsuario() {
+  let signInEmail = document.querySelector("#sign-in-email").value;
+  let signInPassword = document.querySelector("#sign-in-password").value;
 
-    let signInEmail = document.querySelector('#sign-in-email').value;
-    let signInPassword = document.querySelector('#sign-in-password').value;
-
-    signInWithEmailAndPassword(auth, signInEmail, signInPassword)
+  signInWithEmailAndPassword(auth, signInEmail, signInPassword)
     .then((userCredential) => {
-        user = userCredential.user;
-        window.location.href = "../home/index.html";
+      user = userCredential.user;
+      window.location.href = "../../../../pages/menu/index.html";
     })
     .catch((error) => {
-        console.log(error.message);
-    });
-
-}
-
-function verificaUsuario() {
-    onAuthStateChanged(auth, (user) => {
-        return user
+      console.log(error.message);
     });
 }
 
+async function verificaUsuario() {
+    return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, (user) => {
+            resolve(user);
+        });
+    });
+}
 
