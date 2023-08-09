@@ -77,7 +77,7 @@
     <div id="status"></div>
 
     <script>
-        var questions = [
+        let questions = [
             {
                 pergunta: "Juliana vai almoçar e deve escolher um entre dois tipos de arroz, uma entre quatro tipos de salada e um entre três tipos de carne. De quantos modos diferentes pode elaborar sua refeição?",
                 opcoes: ["7", "8", "12", "24", "36"],
@@ -180,27 +180,46 @@
             }
         ];
 
-        var questionIndex = 0;
+        let questionIndex = 0;
+        let numCorretas = 0;
+        let numIncorretas = 0;
+        let selectedQuestions = [];
+
+        function getRandomQuestion() {
+            let randomIndex = Math.floor(Math.random() * questions.length);
+            if (!selectedQuestions.includes(randomIndex)) {
+                selectedQuestions.push(randomIndex);
+                return questions[randomIndex];
+            } else {
+                return getRandomQuestion();
+            }
+        }
 
         function showQuestion() {
-            var questionElement = document.getElementById("question");
-            var optionsElement = document.getElementById("options");
-            var question = questions[questionIndex];
+            if (questionIndex < 10) {
+                let questionElement = document.getElementById("question");
+                let optionsElement = document.getElementById("options");
+                let question = getRandomQuestion();
 
-            questionElement.textContent = question.pergunta;
+                questionElement.textContent = question.pergunta;
 
-            optionsElement.innerHTML = "";
+                optionsElement.innerHTML = "";
 
-            for (var i = 0; i < question.opcoes.length; i++) {
-                var option = document.createElement("button");
-                option.textContent = question.opcoes[i];
-                option.addEventListener("click", checkAnswer.bind(null, i));
-                optionsElement.appendChild(option);
+                for (let i = 0; i < question.opcoes.length; i++) {
+                    let option = document.createElement("button");
+                    option.textContent = question.opcoes[i];
+                    option.addEventListener("click", checkAnswer.bind(null, i));
+                    optionsElement.appendChild(option);
+                }
+                updateStatus();
+            } else {
+                alert("Trivia concluída!");
+                location.reload();
             }
         }
 
         function checkAnswer(selectedIndex) {
-            var question = questions[questionIndex];
+            let question = questions[selectedQuestions[questionIndex]];
 
             if (selectedIndex === question.resposta - 1) {
                 alert("Resposta correta!");
@@ -210,27 +229,15 @@
                 numIncorretas++;
             }
 
-            if (questionIndex < questions.length - 1) {
-                questionIndex++;
-                showQuestion();
-            } else {
-                alert("Trivia concluída!");
-                location.reload();
-            }
-
-            updateStatus();
+            questionIndex++;
+            showQuestion();
         }
-
-        var numCorretas = 0;
-        var numIncorretas = 0;
 
         function updateStatus() {
-            var statusElement = document.getElementById("status");
-            statusElement.textContent = `Pergunta ${questionIndex + 1} de ${questions.length} | Corretas: ${numCorretas} | Incorretas: ${numIncorretas}`;
+            let statusElement = document.getElementById("status");
+            statusElement.textContent = `Pergunta ${questionIndex + 1} de 10 | Corretas: ${numCorretas} | Incorretas: ${numIncorretas}`;
         }
 
-
-        updateStatus();
         showQuestion();
     </script>
 </body>
