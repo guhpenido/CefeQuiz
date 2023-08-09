@@ -50,8 +50,6 @@
         </a>
         <nav id="navbar" class="navbar">
           <ul>
-            <li><a href="#hero">Início</a></li>
-            <li><a href="#about">Sobre</a></li>
             <li><a href="../../index.html">Sair</a></li>
           </ul>
         </nav>
@@ -62,10 +60,10 @@
     </header>
 
     <main id="main">
-      <br><h1>Olá <span id="nome">Gustavo</span>, bem vind@!</h1>
+      <br><h1>Olá <span id="nome"></span>, bem vind@!</h1>
       <div class="tela-mapa">
         <div class="conteudo-mapa">
-          <div class="retangulo" id="mapa-um" onmouseenter="hoverSound()">
+          <div class="retangulo" id="mapa-um">
             <div class="conteudo-retangulo">
               <h2>01</h2>
               <h3>Principio multiplicativo</h3>
@@ -75,14 +73,13 @@
                 acerto para aprovação.
               </p>
               <a
-                id="jogar-html"
-                onclick="irParaOJogo()"
-                href="../quiz/multiplicativo.html"
+                id="jogar-fase1"
+                href="#"
                 >JOGAR</a
               >
             </div>
           </div>
-          <div class="retangulo" id="mapa-dois" onmouseenter="hoverSound()">
+          <div class="retangulo" id="mapa-dois">
             <div class="conteudo-retangulo">
               <h2>02</h2>
               <h3>Permutação</h3>
@@ -91,10 +88,10 @@
                 simples e com repetição. Deve-se obter no minimo 60% de acerto
                 para aprovação.
               </p>
-              <a href="../quiz/permutacao.html">EM BREVE</a>
+              <a id="jogar-fase2"href="#">INDISPONÍVEL</a>
             </div>
           </div>
-          <div class="retangulo" id="mapa-tres" onmouseenter="hoverSound()">
+          <div class="retangulo" id="mapa-tres">
             <div class="conteudo-retangulo">
               <h2>03</h2>
               <h3>Combinação</h3>
@@ -103,7 +100,7 @@
                 arranjo simples. Deve-se obter no minimo 60% de acerto para
                 aprovação.
               </p>
-              <a href="../quiz/quizCombinacao.html">EM BREVE</a>
+              <a id="jogar-fase3" href="#">INDISPONÍVEL</a>
             </div>
           </div>
         </div>
@@ -140,8 +137,8 @@
           <div class="col-lg-2 col-6 footer-links">
             <h4>Links</h4>
             <ul>
-              <li><a href="#">Início</a></li>
-              <li><a href="#">Sobre</a></li>
+              <li><a href="../../index.html">Início</a></li>
+              <li><a href="../../index.html">Sobre</a></li>
               <li><a href="../login/login.html">Quiz</a></li>
             </ul>
           </div>
@@ -181,5 +178,7 @@
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/vanilla-tilt.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script type="module" src="../../pages/login/assets/js/firebase.js"></script>
+    <script type="module" src="./assets/js/verificaLogin.js"></script>
   </body>
 </html>
