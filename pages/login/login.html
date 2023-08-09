@@ -39,13 +39,15 @@
 				<h1>Entre na sua conta</h1>
 				<span>Use sua conta</span>
 				<div id="escolha">
-					<input type="radio" id="contactChoice2" name="contact" value="professor"/>
-					<label id="professor" for="contactChoice2">Professor</label>
-					<input type="radio" id="contactChoice1" name="contact" value="aluno"/>
+					<input type="radio" id="contactChoice1" name="tipo" value="aluno" onchange="alteraTipo()" checked/>
 					<label id="aluno" for="contactChoice1">Aluno</label>
+					<input type="radio" id="contactChoice2" name="tipo" value="professor" onchange="alteraTipo()"/>
+					<label id="professor" for="contactChoice2">Professor</label>
 				</div>
 				<input id="sign-in-email" type="email" placeholder="Email" />
 				<input id="sign-in-password" type="password" placeholder="Senha" />
+				<input id="sign-in-cod" type="text" placeholder="Código" class="hidden"/>
+				<span id="span-error"></span>
 				<a href="#">Esqueceu sua senha?</a>
 				<button id="sign-in-btn">Entrar</button>
 			</div>
@@ -76,6 +78,20 @@
 			placeholder: 'Curso'
 		});
 	});
+
+
+	function alteraTipo() {
+		let signInTipo = document.querySelector('input[name="tipo"]:checked').value;
+		let codEl = document.querySelector('#sign-in-cod');
+
+		console.log(signInTipo)
+
+		if (signInTipo == "professor") {
+			codEl.classList.remove('hidden');
+		} else {
+			codEl.classList.add('hidden');
+		}
+	}
 	</script>
 </body>
 </html>
