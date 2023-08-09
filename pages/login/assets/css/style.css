@@ -180,7 +180,7 @@ input:focus{
 }
 
 .hidden{
-	display: none;
+	display: none!important;
 }
 
 .container.right-panel-active .overlay-container{
@@ -279,7 +279,7 @@ footer a {
     text-decoration: none;
 }
 
-#escolha {
+.escolha {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -292,7 +292,7 @@ footer a {
     margin-left: 5px;
 }
 
-#aluno {
+.escolha label {
     margin-right: 10px;
     margin-top: 5px;
     margin-left: 5px;

@@ -10,34 +10,69 @@ signUpBtn.addEventListener('click', cadastraUsuario);
 
 function cadastraUsuario() {
 
+    let signUpTipo = document.querySelector('input[name="tipo2"]:checked').value
     let signUpNome = document.querySelector('#sign-up-nome').value;
     let signUpEmail = document.querySelector('#sign-up-email').value;
     let signUpPassword = document.querySelector('#sign-up-password').value;
     let signUpCurso = document.querySelector('#sign-up-curso').value;
+    let signUpCod = document.querySelector('#sign-up-cod').value;
     console.log(signUpCurso);
 
-    createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
-    .then((userCredential) => {
-        // Signed in 
-        user = userCredential.user;
-        // ...
+    if(signUpTipo == "professor"){
+        if (signUpCod == "123") {
+            createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
+            .then((userCredential) => {
+                // Signed in 
+                user = userCredential.user;
+                // ...
 
-        const usuario = {
-            nome: signUpNome,
-            email: signUpEmail,
-            uid: user.uid,
-            curso: signUpCurso,
-            tipo: "aluno"
+                const usuario = {
+                    nome: signUpNome,
+                    email: signUpEmail,
+                    uid: user.uid,
+                    tipo: "professor"
+                }
+            
+                setDoc(doc(db, "professor", user.uid), usuario);
+
+                // Cadastrar Código aleatório e exibi-lo
+
+                window.location.href = "../home/index.html";
+
+            })
+            .catch((error) => {
+                console.log(error.message)
+            });
+        } else {
+            errorHandler("cod-invalid")
         }
+        
+    } else {
+        createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
+        .then((userCredential) => {
+            // Signed in 
+            user = userCredential.user;
+            // ...
     
-        setDoc(doc(db, "aluno", user.uid), usuario);
+            const usuario = {
+                nome: signUpNome,
+                email: signUpEmail,
+                uid: user.uid,
+                curso: signUpCurso,
+                tipo: "aluno"
+            }
+        
+            setDoc(doc(db, "aluno", user.uid), usuario);
+    
+            window.location.href = "../home/index.html";
+    
+        })
+        .catch((error) => {
+            console.log(error.message)
+        });
+    }
 
-        window.location.href = "../home/index.html";
-
-    })
-    .catch((error) => {
-        console.log(error.message)
-    });
+    
 
 }
 
