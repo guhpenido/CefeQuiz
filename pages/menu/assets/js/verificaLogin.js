@@ -37,6 +37,9 @@ async function checkCertificados() {
       let mapa1 = document.getElementById("mapa-um");
       let mapa2 = document.getElementById("mapa-dois");
       let mapa3 = document.getElementById("mapa-tres");
+      botaoFase1.addEventListener("click", () => {
+        window.location.href = "../../../../pages/quiz/multiplicativo.html";
+      });
       try {
         const querySnapshot = await getDocs(q);
 
