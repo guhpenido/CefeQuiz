@@ -25,31 +25,30 @@ function cadastraUsuario() {
   let signUpPassword = document.querySelector("#sign-up-password").value;
   let signUpCurso = document.querySelector("#sign-up-curso").value;
   let signUpCod = document.querySelector("#sign-up-cod").value;
-  console.log(signUpCurso);
 
   if (signUpTipo == "professor") {
-    if (signUpCod == "123") {
+    if (signUpCod == "3562") {
       createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
         .then((userCredential) => {
           // Signed in
           user = userCredential.user;
           // ...
 
-          const usuario = {
+          const professor = {
             nome: signUpNome,
             email: signUpEmail,
             uid: user.uid,
             tipo: "professor",
+            cod: "3562"
           };
 
-          setDoc(doc(db, "professor", user.uid), usuario);
+          setDoc(doc(db, "professor", user.uid), professor);
 
-          // Cadastrar Código aleatório e exibi-lo
+          window.location.href = "../../services/verificaCertificado.html";
 
-          window.location.href = "../home/index.html";
         })
         .catch((error) => {
-          console.log(error.message);
+            errorHandler(error.message);
         });
     } else {
       errorHandler("cod-invalid");
@@ -74,7 +73,7 @@ function cadastraUsuario() {
         window.location.href = "../home/index.html";
       })
       .catch((error) => {
-        console.log(error.message);
+        errorHandler(error.message);
       });
   }
 }
@@ -141,8 +140,6 @@ function errorHandler(erro, cod) {
     erro = erro.code;
   }
 
-  console.log(erro);
-
   switch (erro) {
     case "auth/invalid-email":
       erroLoginEl.textContent = "Email Inválido.";
@@ -151,13 +148,14 @@ function errorHandler(erro, cod) {
     case "auth/wrong-password":
       erroLoginEl.textContent = "Senha Inválida.";
       break;
-
     case "auth/user-not-found":
-      erroLoginEl.textContent =
-        "Usuário não encontrado. Email ou Senha Incorretas";
+      erroLoginEl.textContent = "Usuário não encontrado. Email ou Senha Incorretas";
       break;
     case "cod-invalid":
       erroLoginEl.textContent = "Código Inválido";
+      break;
+    case "email-already-in-use":
+      erroLoginEl.textContent = "E-mail já utilizado.";
       break;
     default:
       erroLoginEl.textContent = "Ocorreu um erro. Tente novamente.";
