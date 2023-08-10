@@ -74,6 +74,7 @@ async function cadastraUsuario() {
         window.location.href = "./index.html";
       })
       .catch((error) => {
+        console.log(error.message)
         errorHandlerCad(error, true);
       });
   }
@@ -187,8 +188,8 @@ function errorHandlerCad(erro, cod) {
     case "cod-invalid":
       erroCadEl.textContent = "Código Inválido";
       break;
-    case "email-already-in-use":
-    case "email-already-exists":
+    case "auth/email-already-in-use":
+    case "auth/email-already-exists":
       erroCadEl.textContent = "E-mail já utilizado.";
       break;
     default:
