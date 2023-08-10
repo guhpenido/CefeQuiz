@@ -347,10 +347,14 @@ option{
 		height: 80%;
 		width: 100%;
 	}
-	.container.right-panel-active .overlay-container, 
-	.container.right-panel-active .sign-in-container,
-	.container.right-panel-active .sign-up-container{
+	.container.right-panel-active .overlay-container {
 		transform: none;
+	}
+	.container.right-panel-active .sign-up-container{
+		transform: translateX(0%);
+	}
+	.sign-up-container{
+		transform: translateX(-100%);
 	}
 	body{
 		display: unset;
