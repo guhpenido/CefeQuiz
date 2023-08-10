@@ -63,7 +63,6 @@ async function verificaCert() {
         spanError.textContent = "Preencha o Campo."
     }
 
-    
 
 }
 
