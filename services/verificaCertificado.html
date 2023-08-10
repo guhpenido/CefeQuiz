@@ -19,8 +19,9 @@
 
 <div id="form-container">
   <label for="id-certificado">Verfique o Certificado</label>
-  <input type="text" value="" name="id-certificado" placeholder="ID do Certificado" required>
-  <button name="verificar" data-toggle="modal" href="#modalSuccess" id="btn-verificar">Verificar</button>
+  <input type="text" value="" name="id-certificado" placeholder="ID do Certificado" id="input-cert" required>
+  <span id="span-error" style="color: red; margin-bottom: 15px; display: block;"></span>
+  <button name="verificar" data-toggle="modal" id="btn-verificar">Verificar</button>
 </div>
 <!-- partial -->
 
@@ -59,6 +60,8 @@
 		</div>
 	</div>
 </div>
+<script type="module" src="../pages/login/assets/js/firebase.js"></script>
+<script type="module" src="verificaCertificado.js"></script>
   
 </body>
 </html>
