@@ -19,7 +19,7 @@
 					<input type="radio" id="professor2" name="tipo2" value="professor" onchange="alteraTipoCad()"/>
 					<label id="professor2" for="professor2">Professor</label>
 				</div>
-				<input id="sign-up-nome" type="text" placeholder="Nome"/>
+				<input id="sign-up-nome" type="text" placeholder="Nome" required/>
 				<select name="curso" id="sign-up-curso" class="js-example-basic-single">
 					<option></option>
 					<option value="INF">Informática</option>
@@ -35,9 +35,10 @@
 					<option value="TT">Trânsito</option>
 					<option value="EST">Estradas</option>
 				</select>
-				<input id="sign-up-email" type="email" placeholder="Email"/>
-				<input id="sign-up-password" type="password" placeholder="Senha"/>
-				<input id="sign-up-cod" type="text" placeholder="Código Verificador" class="hidden"/>
+				<input id="sign-up-email" type="email" placeholder="Email" required/>
+				<input id="sign-up-password" type="password" placeholder="Senha" required/>
+				<input id="sign-up-cod" type="text" placeholder="Código Verificador" class="hidden" required/>
+				<span id="span-error-cad"></span>
 				<button id="sign-up-btn">Criar conta</button>
 			</div>
 		</div>
@@ -51,9 +52,9 @@
 					<input type="radio" id="contactChoice2" name="tipo" value="professor" onchange="alteraTipo()"/>
 					<label id="professor" for="contactChoice2">Professor</label>
 				</div>
-				<input id="sign-in-email" type="email" placeholder="Email" />
-				<input id="sign-in-password" type="password" placeholder="Senha" />
-				<input id="sign-in-cod" type="text" placeholder="Código" class="hidden"/>
+				<input id="sign-in-email" type="email" placeholder="Email" required/>
+				<input id="sign-in-password" type="password" placeholder="Senha" required/>
+				<input id="sign-in-cod" type="text" placeholder="Código" class="hidden" required/>
 				<span id="span-error"></span>
 				<a href="#">Esqueceu sua senha?</a>
 				<button id="sign-in-btn">Entrar</button>

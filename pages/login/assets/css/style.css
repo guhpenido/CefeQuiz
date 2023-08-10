@@ -328,7 +328,7 @@ option{
 	width: 100%!important;
 }
 
-#span-error{
+#span-error, #span-error-cad{
 	color: red;
 }
 
@@ -359,6 +359,7 @@ option{
 	body{
 		display: unset;
 		margin: 0;
+		overflow-x: hidden;
 	}
 	.overlay-panel{
 		justify-content: start;
