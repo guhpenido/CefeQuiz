@@ -5,6 +5,8 @@ import {
   query,
   where,
   getDocs,
+  doc,
+  getDoc,
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 
 function generateUniqueID() {
@@ -69,7 +71,7 @@ async function addCertificado(userId, fase) {
     let faseI = document.getElementById("fase");
     let codigoI = document.getElementById("codigo");
 
-    nomeI.innerHTML = getUserName(uid);
+    nomeI.innerHTML = await getUserName(userId);
     faseI.innerHTML = fase;
     codigoI.innerHTML = uniqueId;
     console.log("Certificado added successfully.");
@@ -81,7 +83,8 @@ async function addCertificado(userId, fase) {
 // Example usage:
 const userId = localStorage.getItem("uid");
 const fase = localStorage.getItem("fase");
-
-addCertificado(userId, fase);
+if(userId != null && fase !=null){
+  addCertificado(userId, fase);
+}
 localStorage.setItem("uid", null);
 localStorage.setItem("fase", null);
