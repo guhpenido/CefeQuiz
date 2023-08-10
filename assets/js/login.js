@@ -156,6 +156,7 @@ function errorHandlerLog(erro, cod) {
       erroLoginEl.textContent = "Código Inválido";
       break;
     case "email-already-in-use":
+    case "email-already-exists":
       erroLoginEl.textContent = "E-mail já utilizado.";
       break;
     default:
@@ -187,6 +188,7 @@ function errorHandlerCad(erro, cod) {
       erroCadEl.textContent = "Código Inválido";
       break;
     case "email-already-in-use":
+    case "email-already-exists":
       erroCadEl.textContent = "E-mail já utilizado.";
       break;
     default:
