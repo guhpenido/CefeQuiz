@@ -19,7 +19,7 @@ let user = "";
 let signUpBtn = document.querySelector("#sign-up-btn");
 signUpBtn.addEventListener("click", cadastraUsuario);
 
-function cadastraUsuario() {
+async function cadastraUsuario() {
   let signUpTipo = document.querySelector('input[name="tipo2"]:checked').value;
   let signUpNome = document.querySelector("#sign-up-nome").value;
   let signUpEmail = document.querySelector("#sign-up-email").value;
@@ -30,7 +30,7 @@ function cadastraUsuario() {
   if (signUpTipo == "professor") {
     if (signUpCod == "3562") {
       createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
           // Signed in
           user = userCredential.user;
           // ...
@@ -43,8 +43,8 @@ function cadastraUsuario() {
             cod: "3562"
           };
 
-          setDoc(doc(db, "professor", user.uid), professor);
-
+          
+          await setDoc(doc(db, "professor", user.uid), professor);
           window.location.href = "./verificaCertificado.html";
 
         })
@@ -56,7 +56,7 @@ function cadastraUsuario() {
     }
   } else {
     createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         user = userCredential.user;
         // ...
@@ -69,7 +69,7 @@ function cadastraUsuario() {
           tipo: "aluno",
         };
 
-        setDoc(doc(db, "aluno", user.uid), usuario);
+        await setDoc(doc(db, "aluno", user.uid), usuario);
 
         window.location.href = "./index.html";
       })
