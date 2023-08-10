@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 import { auth, db } from "./firebase.js";
 import {
@@ -48,10 +49,10 @@ function cadastraUsuario() {
 
         })
         .catch((error) => {
-            errorHandlerCad(error.message);
+            errorHandlerCad(error, true);
         });
     } else {
-      errorHandlerCad("cod-invalid");
+      errorHandlerCad("cod-invalid", false);
     }
   } else {
     createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
@@ -73,7 +74,7 @@ function cadastraUsuario() {
         window.location.href = "../home/index.html";
       })
       .catch((error) => {
-        errorHandlerCad(error.message);
+        errorHandlerCad(error, true);
       });
   }
 }
@@ -192,4 +193,29 @@ function errorHandlerCad(erro, cod) {
       erroCadEl.textContent = "Ocorreu um erro. Tente novamente.";
       break;
   }
+}
+
+let recSenha = document.querySelector('#senha-recover');
+recSenha.addEventListener('click', recuperarSenha);
+
+function recuperarSenha() {
+
+  let signInEmail = document.querySelector("#sign-in-email").value;
+
+  if(signInEmail == ""){
+    let spanError = document.querySelector('#span-error')
+    spanError.textContent = "Preencha o seu email."
+  } else {
+    sendPasswordResetEmail(auth, signInEmail)
+    .then(() => {
+      let spanSuccess = document.querySelector('#span-success');
+      spanSuccess.textContent = "Email de recuperação enviado!";
+    })
+    .catch((error) => {
+      errorHandlerLog(error, true)
+    });
+  }
+ 
+  
+
 }
