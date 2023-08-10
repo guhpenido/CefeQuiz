@@ -48,10 +48,10 @@ function cadastraUsuario() {
 
         })
         .catch((error) => {
-            errorHandler(error.message);
+            errorHandlerCad(error.message);
         });
     } else {
-      errorHandler("cod-invalid");
+      errorHandlerCad("cod-invalid");
     }
   } else {
     createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
@@ -73,7 +73,7 @@ function cadastraUsuario() {
         window.location.href = "../home/index.html";
       })
       .catch((error) => {
-        errorHandler(error.message);
+        errorHandlerCad(error.message);
       });
   }
 }
@@ -109,10 +109,10 @@ async function loginUsuario() {
           window.location.href = "../../services/verificaCertificado.html";
         })
         .catch((error) => {
-          errorHandler(error, true);
+          errorHandlerLog(error, true);
         });
     } else {
-      errorHandler("cod-invalid", false);
+      errorHandlerLog("cod-invalid", false);
     }
   } else {
     signInWithEmailAndPassword(auth, signInEmail, signInPassword)
@@ -121,7 +121,7 @@ async function loginUsuario() {
         window.location.href = "../../../../pages/menu/index.html";
       })
       .catch((error) => {
-        errorHandler(error, true);
+        errorHandlerLog(error, true);
       });
   }
 }
@@ -132,7 +132,7 @@ function verificaUsuario() {
   });
 }
 
-function errorHandler(erro, cod) {
+function errorHandlerLog(erro, cod) {
   let erroLoginEl = document.querySelector("#span-error");
 
   // True indica que o erro é do Firebase
@@ -159,6 +159,37 @@ function errorHandler(erro, cod) {
       break;
     default:
       erroLoginEl.textContent = "Ocorreu um erro. Tente novamente.";
+      break;
+  }
+}
+
+function errorHandlerCad(erro, cod) {
+  let erroCadEl = document.querySelector("#span-error-cad");
+
+  // True indica que o erro é do Firebase
+  if (cod) {
+    erro = erro.code;
+  }
+
+  switch (erro) {
+    case "auth/invalid-email":
+      erroCadEl.textContent = "Email Inválido.";
+      break;
+    case "auth/invalid-password":
+    case "auth/wrong-password":
+      erroCadEl.textContent = "Senha Inválida.";
+      break;
+    case "auth/user-not-found":
+      erroCadEl.textContent = "Usuário não encontrado. Email ou Senha Incorretas";
+      break;
+    case "cod-invalid":
+      erroCadEl.textContent = "Código Inválido";
+      break;
+    case "email-already-in-use":
+      erroCadEl.textContent = "E-mail já utilizado.";
+      break;
+    default:
+      erroCadEl.textContent = "Ocorreu um erro. Tente novamente.";
       break;
   }
 }

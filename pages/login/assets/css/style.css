@@ -328,6 +328,41 @@ option{
 	width: 100%!important;
 }
 
-#span-error{
+#span-error, #span-error-cad{
 	color: red;
+}
+
+@media screen and (max-width: 768px) { 
+	.container{
+		overflow: unset;
+		min-height: 500px;
+    	height: 50vh;
+	}
+	.sign-in-container, .sign-up-container{
+		width: 100%;
+	}
+	.overlay-container{
+		top: 100%;
+		left: 0;
+		height: 80%;
+		width: 100%;
+	}
+	.container.right-panel-active .overlay-container {
+		transform: none;
+	}
+	.container.right-panel-active .sign-up-container{
+		transform: translateX(0%);
+	}
+	.sign-up-container{
+		transform: translateX(-100%);
+	}
+	body{
+		display: unset;
+		margin: 0;
+		overflow-x: hidden;
+	}
+	.overlay-panel{
+		justify-content: start;
+		padding: 40px;
+	}
 }
