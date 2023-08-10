@@ -118,7 +118,7 @@ async function loginUsuario() {
     signInWithEmailAndPassword(auth, signInEmail, signInPassword)
       .then((userCredential) => {
         user = userCredential.user;
-        window.location.href = "../../../../pages/menu/index.html";
+        window.location.href = "../../../menu/index.html";
       })
       .catch((error) => {
         errorHandlerLog(error, true);
