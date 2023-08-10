@@ -1,4 +1,3 @@
-//References
 let timeLeft = document.querySelector(".time-left");
 let quizContainer = document.getElementById("container");
 let nextBtn = document.getElementById("next-button");
@@ -187,31 +186,39 @@ restart.addEventListener("click", () => {
 });
 
 //Next Button
-nextBtn.addEventListener(
-  "click",
-  (displayNext = () => {
-    //increment questionCount
-    questionCount += 1;
-    //if last question
-    if (questionCount == quizArray.length) {
-      //hide question container and display score
-      displayContainer.classList.add("hide");
-      scoreContainer.classList.remove("hide");
-      //user score
-      userScore.innerHTML =
-        "Você acertou " + scoreCount + " de " + questionCount;
-    } else {
-      //display questionCount
-      countOfQuestion.innerHTML =
-        questionCount + 1 + " de " + quizArray.length + " questões";
-      //display quiz
-      quizDisplay(questionCount);
-      count = 1024;
-      clearInterval(countdown);
-      timerDisplay();
-    }
-  })
-);
+const displayNext = () => {
+   //increment questionCount
+  questionCount += 1;
+  //if last question
+  if (questionCount == quizArray.length) {
+    //hide question container and display score
+    displayContainer.classList.add("hide");
+    scoreContainer.classList.remove("hide");
+    //user score
+    userScore.innerHTML =
+      "Você acertou " + scoreCount + " de " + questionCount;
+      if(scoreCount >=6){
+        restart.innerHTML = "Continuar";
+        localStorage.setItem("fase", 3);
+        restart.addEventListener("click", () => {
+          window.location.href = "../../../../services/certificado.html"
+        });  
+      }
+  } else {
+    //display questionCount
+    countOfQuestion.innerHTML =
+      questionCount + 1 + " de " + quizArray.length + " questões";
+    //display quiz
+    quizDisplay(questionCount);
+    count = 1024;
+    clearInterval(countdown);
+    timerDisplay();
+  }
+};
+nextBtn.addEventListener("click", () => {
+  // Call the displayNext function here
+  displayNext();
+});
 
 //Timer
 const timerDisplay = () => {
@@ -293,6 +300,7 @@ function checker(userOption) {
     element.disabled = true;
   });
 }
+
 
 //initial setup
 function initial() {

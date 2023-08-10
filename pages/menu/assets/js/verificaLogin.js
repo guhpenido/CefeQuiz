@@ -46,21 +46,21 @@ async function checkCertificados() {
         querySnapshot.forEach((doc) => {
           const certificadoData = doc.data();
           const fase = certificadoData.fase;
-
+          console.log(fase);
           switch (fase) {
-            case 1:
+            case "1":
               botaoFase2.addEventListener("click", () => {
                 window.location.href = "../../../../pages/quiz/permutacao.html";
               });
               mapa2.style.background =
                 'url("../../../../pages/menu/assets/img/fase2.png")';
               mapa1.style.background =
-                'url("../../../../pages/menu/assets/mg/fase1ok.png")';
+                'url("../../../../pages/menu/assets/img/fase1ok.png")';
               botaoFase1.innerHTML = "Realizado";
               botaoFase2.innerHTML = "Jogar";
               console.log("Fase 1 action:", certificadoData);
               break;
-            case 2:
+            case "2":
               botaoFase3.addEventListener("click", () => {
                 window.location.href =
                   "../../../../pages/quiz/quizCombinacao.html";
@@ -73,7 +73,7 @@ async function checkCertificados() {
               botaoFase3.innerHTML = "Jogar";
               console.log("Fase 2 action:", certificadoData);
               break;
-            case 3:
+            case "3":
               mapa3.style.background =
                 'url("../../../../pages/menu/assets/img/fase3ok.png")';
               botaoFase3.innerHTML = "Realizado";
