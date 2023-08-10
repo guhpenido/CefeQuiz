@@ -38,7 +38,7 @@ async function checkCertificados() {
       let mapa2 = document.getElementById("mapa-dois");
       let mapa3 = document.getElementById("mapa-tres");
       botaoFase1.addEventListener("click", () => {
-        window.location.href = "../../../../pages/quiz/multiplicativo.html";
+        window.location.href = "../../../quiz/multiplicativo.html";
       });
       try {
         const querySnapshot = await getDocs(q);
@@ -50,12 +50,12 @@ async function checkCertificados() {
           switch (fase) {
             case "1":
               botaoFase2.addEventListener("click", () => {
-                window.location.href = "../../../../pages/quiz/permutacao.html";
+                window.location.href = "../../../pages/quiz/permutacao.html";
               });
               mapa2.style.background =
-                'url("../../../../pages/menu/assets/img/fase2.png")';
+                'url("../../../pages/menu/assets/img/fase2.png")';
               mapa1.style.background =
-                'url("../../../../pages/menu/assets/img/fase1ok.png")';
+                'url("../../../pages/menu/assets/img/fase1ok.png")';
               botaoFase1.innerHTML = "Realizado";
               botaoFase2.innerHTML = "Jogar";
               console.log("Fase 1 action:", certificadoData);
@@ -63,19 +63,19 @@ async function checkCertificados() {
             case "2":
               botaoFase3.addEventListener("click", () => {
                 window.location.href =
-                  "../../../../pages/quiz/quizCombinacao.html";
+                  "../../../pages/quiz/quizCombinacao.html";
               });
               mapa3.style.background =
                 'url("../../../../pages/menu/assets/img/fase3.png")';
               mapa2.style.background =
-                'url("../../../../pages/menu/assets/img/fase2ok.png")';
+                'url("../../../pages/menu/assets/img/fase2ok.png")';
               botaoFase2.innerHTML = "Realizado";
               botaoFase3.innerHTML = "Jogar";
               console.log("Fase 2 action:", certificadoData);
               break;
             case "3":
               mapa3.style.background =
-                'url("../../../../pages/menu/assets/img/fase3ok.png")';
+                'url("../../../pages/menu/assets/img/fase3ok.png")';
               botaoFase3.innerHTML = "Realizado";
               console.log("Fase 3 action:", certificadoData);
               break;
@@ -115,7 +115,7 @@ async function getUserInfo() {
       }
     } else {
       alert("Você não está logado!");
-      window.location.href = "../../../../pages/login/login.html";
+      window.location.href = "../../../pages/login/login.html";
     }
 
     // Unsubscribe to the listener
